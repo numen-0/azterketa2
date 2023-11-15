@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Bariables
+DIR_ORIGIN="/home/lsi/Segurtasuna/"
+DIR_BACKUPS="/var/tmp/Backups"
+DIR_YESTERDAY="$DIR_BACKUPS/$(date --date="yesterday" +"%Y-%m-%d")"
+DIR_TODAY="$DIR_BACKUPS/$(date +"%Y-%m-%d")"
+
+# Programa
+# Crear directorios
+[ -d "$DIR_YESTERDAY" ] || mkdir -pv $DIR_YESTERDAY
+[ -d "$DIR_TODAY" ] || mkdir -pv $DIR_TODAY
+
+# Copia de Segur
+rsync -av --link-dest=$DIR_YESTERDAY $DIR_ORIGIN $DIR_TODAY
